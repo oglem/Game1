@@ -1,0 +1,25 @@
+{
+  "name": "game1",
+  "version": "1.0.0",
+  "description": "Test Game",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oglem/Game1.git"
+  },
+  "keywords": [
+    "Game"
+  ],
+  "author": "Peter and Miles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oglem/Game1/issues"
+  },
+  "homepage": "https://github.com/oglem/Game1#readme",
+  "dependencies": {
+    "phaser": "^3.55.2"
+  }
+}
