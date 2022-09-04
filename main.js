@@ -2,44 +2,40 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 200 }
-        }
-    },
     scene: {
         preload: preload,
-        create: create
+        create: create,
+        update: update,
     }
 };
+
+var isClicking = false;
 
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.setBaseURL('http://labs.phaser.io');
-
-    this.load.image('sky', 'assets/skies/space3.png');
-    this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-    this.load.image('red', 'assets/particles/red.png');
+    this.load.image('ground', 'assets/platform.png');
 }
 
 function create() {
-    this.add.image(400, 300, 'sky');
+    this.input.on('gameobjectdown', onObjectClicked);
+}
 
-    var particles = this.add.particles('red');
+function onObjectClicked() {
+    console.log('x');
 
-    var emitter = particles.createEmitter({
-        speed: 100,
-        scale: { start: 1, end: 0 },
-        blendMode: 'ADD'
-    });
+    return false;
+}
 
-    var logo = this.physics.add.image(400, 100, 'logo');
 
-    logo.setVelocity(100, 200);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
+function update() {
 
-    emitter.startFollow(logo);
+    if (!this.input.activePointer.isDown && isClicking == true) {
+        var pos = this.input.activePointer.position;
+        this.add.image(pos.x, pos.y, 'ground').setOrigin(0, 0).setInteractive();
+        isClicking = false;
+    } else if (this.input.activePointer.isDown && isClicking == false) {
+        isClicking = true;
+    }
+
 }
